@@ -1,5 +1,7 @@
+import { BlogPost } from "@/utils/openai";
+
 export const OpenAiService = {
-    async generateBlogPost(topic: string): Promise<string | null> {
+    async generateBlogPost(topic: string): Promise<BlogPost> {
       try {
         const response = await fetch('/api/generateBlogPost', {
           method: 'POST',
