@@ -1,19 +1,24 @@
+import { OpenAiService } from '@/services/openai';
 import { useState } from 'react';
-import { generateBlogIdea } from '../api/generateIdea';
 
 const HomePage = () => {
   const [topic, setTopic] = useState('');
   const [idea, setIdea] = useState('');
 
   const handleGenerateIdea = async () => {
-    if (topic.trim() === '') return;
-    const generatedIdea = await generateBlogIdea(topic);
-    setIdea(generatedIdea);
+    if (topic.trim() !== '') {
+      try {
+        const blogIdea = await OpenAiService.generateBlogPost(topic);
+        setIdea(blogIdea || "");
+      } catch (error) {
+        // Handle or display error to the user
+      }
+    }
   };
 
   return (
     <div>
-      <h1>Blog Idea Generator</h1>
+      <h1>Blog Idea Generator 💡✏️</h1>
       <div>
         <label>Enter a topic:</label>
         <input 
