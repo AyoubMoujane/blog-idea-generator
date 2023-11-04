@@ -3,6 +3,7 @@ import { OpenAiService } from '@/services/openai';
 import BlogPostCard from '../components/BlogPostCard'; // Import the BlogPostCard component and its typing
 import { useState } from 'react';
 import { BlogPost } from '@/utils/openai';
+import GenerateImageButton from '@/components/ImageGenerator';
 
 const HomePage = () => {
   const [topic, setTopic] = useState('');
@@ -26,8 +27,10 @@ const HomePage = () => {
 
   return (
     <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
-      <div className="flex-shrink-0">
-        <h1 className="text-xl font-bold mb-4">Blog Idea Generator 💡✏️</h1>
+      <div className="flex">
+        <div className='items-center'>
+          <h1 className="text-xl font-bold mb-4">Blog Idea Generator 💡✏️</h1>
+        </div>
         <div className="mb-4">
           <label className="block mb-2 text-sm font-bold">Enter a topic:</label>
           <input 
@@ -46,6 +49,7 @@ const HomePage = () => {
         </button>
       </div>
       {blogPost && <BlogPostCard blogPost={blogPost} />} {/* Use the BlogPostCard component to display the generated blog post */}
+      {blogPost && <GenerateImageButton blogPost={blogPost} />}
     </div>
   );
 };

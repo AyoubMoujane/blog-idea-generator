@@ -55,3 +55,22 @@ export async function generateBlogPost(topic: string): Promise<BlogPost> {
     
 }
 
+export async function generateBlogPostImage(blogPost: BlogPost): Promise<OpenAI.Images.Image> {
+    const openai = new OpenAI({apiKey: OPENAI_API_KEY});
+    const promptContent = `${blogPost.title}`;
+    const params : OpenAI.ImageGenerateParams = {prompt: promptContent, n: 1}
+    try {
+        const response = await openai.images.generate(params, )
+        if(response.created) {
+            const image = response.data[0]
+            return image
+        } else {
+            throw new Error(`Error generating the image: number of image generated :${response.created}`)
+        }
+    } catch (error) {
+        console.error('Error generating the image:', error);
+        throw error;
+    }
+    
+}
+
